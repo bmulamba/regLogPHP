@@ -1,15 +1,11 @@
+
 <?php
 
-    $host_server = "localhost";
-    $host_name = "root";
-    $host_password = "";
-    $hostdb_name = "registrationdb";
+    $db_server = "localhost";
+    $db_user = "root";
+    $db_password = "";
+    $db_name = "registrationdb";
+    $con = "";
 
-    $conn = mysqli_connect($host_server, $host_name, $host_password, $hostdb_name );
 
-    if($conn){
-        echo "You are connected";
-    } else {
-        echo "You can't connect";
-    }
 ?>
