@@ -1,4 +1,34 @@
+<?php 
 
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        include 'database.php';
+
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        // $MySql = "insert into `registration`(username, password)
+        // values ('$username', '$password')";
+
+        // $thisResult = mysqli_query($connect, $MySql);
+
+        // if($thisResult == true){
+        //     echo " You have successfully inserted";
+        // } else {
+        //     echo "Check your datas";
+        // }
+
+        $MySql = "select * from `registration` where username = '$username'";
+
+        $thisResult = mysqli_query($connect, $MySql);
+
+        
+
+
+
+    }
+    
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -17,7 +47,7 @@
             <div class="mx-auto col-10 col-md-8 col-lg-6">
 
                 <h1 class="mb-5">Sign up Form</h1>
-                <form>
+                <form action="signup.php" method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
                         <input type="text" class="form-control" name="username"> <br/>

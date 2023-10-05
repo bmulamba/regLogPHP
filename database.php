@@ -5,7 +5,15 @@
     $db_user = "root";
     $db_password = "";
     $db_name = "registrationdb";
-    $con = "";
+    // $connect = "";
+
+    $connect = mysqli_connect($db_server, $db_user, $db_password, $db_name );
+
+    if($connect){
+        echo "You are now connected";
+    } else {
+        echo "Please check the connection";
+    }
 
 
 ?>
