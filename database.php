@@ -9,9 +9,8 @@
 
     $connect = mysqli_connect($db_server, $db_user, $db_password, $db_name );
 
-    if($connect){
-        echo "You are now connected";
-    } else {
+    if(!$connect){
+        
         echo "Please check the connection";
     }
 

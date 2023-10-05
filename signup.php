@@ -1,32 +1,46 @@
-<?php 
+<?php
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        include 'database.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    include 'database.php';
 
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-        // $MySql = "insert into `registration`(username, password)
-        // values ('$username', '$password')";
+    // $MySql = "insert into `registration`(username, password)
+    // values ('$username', '$password')";
 
-        // $thisResult = mysqli_query($connect, $MySql);
+    // $thisResult = mysqli_query($connect, $MySql);
 
-        // if($thisResult == true){
-        //     echo " You have successfully inserted";
-        // } else {
-        //     echo "Check your datas";
-        // }
+    // if($thisResult == true){
+    //     echo " You have successfully inserted";
+    // } else {
+    //     echo "Check your datas";
+    // }
 
-        $MySql = "select * from `registration` where username = '$username'";
+    $MySql = "select * from `registration` where username = '$username'";
 
-        $thisResult = mysqli_query($connect, $MySql);
+    $thisResult = mysqli_query($connect, $MySql);
 
-        
+    if ($thisResult) {
+        $num = mysqli_num_rows($thisResult);
+        if ($num > 0) {
+            echo "User already exit";
+        } else {
 
+            $MySql = "insert into `registration`(username, password)
+            values ('$username', '$password')";
 
+            $thisResult = mysqli_query($connect, $MySql);
 
+            if ($thisResult == true) {
+                echo " Signup successfully";
+            } else {
+                echo "Check your datas";
+            }
+        }
     }
-    
+}
+
 
 ?>
 
@@ -50,11 +64,11 @@
                 <form action="signup.php" method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
-                        <input type="text" class="form-control" name="username"> <br/>
+                        <input type="text" class="form-control" name="username"> <br />
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" name="password" ><br/>
+                        <input type="password" class="form-control" name="password"><br />
                     </div>
                     <button type="submit" class="btn btn-primary form-control">Submit</button>
                 </form>
