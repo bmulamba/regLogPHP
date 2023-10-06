@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($thisResult == true) {
                 // echo " Signup successfully";
                 $success = 1;
+                header('location:login.php');
             } else {
                 echo "Check your datas";
             }
