@@ -1,5 +1,6 @@
 <?php
-$user = 0;
+
+$invalid = 0;
 $success = 0;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -8,39 +9,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // $MySql = "insert into `registration`(username, password)
-    // values ('$username', '$password')";
 
-    // $thisResult = mysqli_query($connect, $MySql);
-
-    // if($thisResult == true){
-    //     echo " You have successfully inserted";
-    // } else {
-    //     echo "Check your datas";
-    // }
-
-    $MySql = "select * from `registration` where username = '$username'";
+    $MySql = "select * from `registration` where username = '$username' and password = '$password'";
 
     $thisResult = mysqli_query($connect, $MySql);
 
     if ($thisResult) {
         $num = mysqli_num_rows($thisResult);
         if ($num > 0) {
-            // echo "User already exit";
-            $user = 1;
+            // echo "Login successfuly";
+            $success = 1;
+            session_start();
+            $_SESSION['username']=$username;
+            header('location:home.php');
         } else {
-
-            $MySql = "insert into `registration`(username, password)
-            values ('$username', '$password')";
-
-            $thisResult = mysqli_query($connect, $MySql);
-
-            if ($thisResult == true) {
-                // echo " Signup successfully";
-                $success = 1;
-            } else {
-                echo "Check your datas";
-            }
+            $invalid = 1;
         }
     }
 }
@@ -61,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 
     <?php
-    if ($user) {
+    if ($success) {
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Sorry!</strong> The user name is already used.
+    <strong>Success!</strong> You successfully login.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -71,22 +54,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     ?>
 
+
     <?php
-    if ($success) {
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Success!</strong> The user name is already used.
+    if ($invalid) {
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Sorry!</strong> Invalid username.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>';
     }
     ?>
+
     <div class="container">
         <div class="row">
             <div class="mx-auto col-10 col-md-8 col-lg-6">
 
-                <h1 class="mb-5">Sign up Form</h1>
-                <form action="signup.php" method="post">
+                <h1 class="mb-5">Login to web</h1>
+                <form action="login.php" method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
                         <input type="text" class="form-control" name="username"> <br />
@@ -95,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" name="password"><br />
                     </div>
-                    <button type="submit" class="btn btn-primary form-control">Submit</button>
+                    <button type="submit" class="btn btn-primary form-control">Login</button>
                 </form>
             </div>
         </div>
