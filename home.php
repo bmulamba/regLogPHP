@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('location:login.php'); }
+    header('location:login.php');}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
 <body>
 
 <h1  class="text-center text-info mt-5">
-        Welcome to this page <?php echo $_SESSION['username']; ?>
+        Welcome to this page MR/Mrs <?php echo $_SESSION['username']; ?>
     </h1> <br/> 
 
     <a href="logout.php" class="text-center p-3 text-danger mx-5" type="button">Logout</button>
